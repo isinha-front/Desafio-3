@@ -1,3 +1,36 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const cpfInput = document.getElementById('cpf');
+  const btnEntrar = document.getElementById('btnEntrar');
+  const btnCadastrar = document.getElementById('btnCadastrar');
+  const btnInscricao = document.getElementById('btnInscricao'); 
+
+  cpfInput.addEventListener('input', () => mascararCPF(cpfInput));
+
+  btnCadastrar.addEventListener('click', function () {
+    window.location.href = 'index.html'; 
+  });
+
+  btnEntrar.addEventListener('click', function (event) {
+    event.preventDefault();
+    const cpfValido = validarCPF();
+    const senhaValida = validarSenha();
+    if (cpfValido && senhaValida) {
+      window.location.href = "index.html";
+    }
+  });
+
+  btnInscricao.addEventListener('click', function (event) {
+    event.preventDefault();
+    const cpfValido = validarCPF();
+    const senhaValida = validarSenha();
+    if (cpfValido && senhaValida && termosCheckbox.checked) {
+      alert("Inscrição realizada com sucesso!");
+      localStorage.removeItem('dadosFormulario');
+      window.location.href = "login.html";
+    }
+  });    
+
+});
 
 //para o modo escuro
 document.getElementById('toggle-dark-mode').addEventListener('click', () => {
@@ -69,3 +102,74 @@ function validarSenha() {
   return true;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('formulario');
+  const trilhas = document.querySelectorAll('.trilha');
+  const termosCheckbox = document.getElementById('termos');
+ 
+  form.addEventListener('submit', () => {
+    alert("Inscrição realizada com sucesso!");
+    localStorage.removeItem('dadosFormulario');
+  });
+  
+  // Recarrega os dados salvos
+  const dadosSalvos = JSON.parse(localStorage.getItem('dadosFormulario'));
+  if (dadosSalvos) {
+    Object.keys(dadosSalvos).forEach(campo => {
+      const input = form.elements[campo];
+      if (input) {
+        if (input.type === 'checkbox') {
+          input.checked = dadosSalvos[campo];
+        } else {
+          input.value = dadosSalvos[campo];
+        }
+      }
+    });
+
+    // Restaurar trilha selecionada
+    if (dadosSalvos.trilhaSelecionada) {
+      trilhas.forEach(trilha => {
+        trilha.classList.remove('selecionada');
+        if (trilha.textContent === dadosSalvos.trilhaSelecionada) {
+          trilha.classList.add('selecionada');
+        }
+      });
+    }
+  }
+
+  // Salvar dados no localStorage ao digitar ou selecionar
+  form.addEventListener('input', salvarDados);
+  termosCheckbox.addEventListener('change', salvarDados);
+  trilhas.forEach(trilha => {
+    trilha.addEventListener('click', () => {
+      trilhas.forEach(t => t.classList.remove('selecionada'));
+      trilha.classList.add('selecionada');
+      salvarDados();
+    });
+  });
+
+  function salvarDados() {
+    const dados = {};
+    [...form.elements].forEach(el => {
+      if (el.name && el.type !== 'file' && el.type !== 'submit') {
+        dados[el.name] = el.type === 'checkbox' ? el.checked : el.value;
+      }
+    });
+
+    // Trilha selecionada
+    const trilhaSelecionada = document.querySelector('.trilha.selecionada');
+    if (trilhaSelecionada) {
+      dados.trilhaSelecionada = trilhaSelecionada.textContent;
+    }
+
+    localStorage.setItem('dadosFormulario', JSON.stringify(dados));
+  }
+
+  form.addEventListener('submit', () => localStorage.removeItem('dadosFormulario'));
+  document.querySelector('.cancelar').addEventListener('click', () => {
+    localStorage.removeItem('dadosFormulario');
+      form.reset();
+   
+  });
+  
+})
