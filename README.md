@@ -33,7 +33,7 @@ JavaScript (ES6)
 Armazenamento Local (localStorage)
 
 📂 Estrutura do Projeto
-
+```
 📁 Desafio-3-main/
 ├── index.html           # Página principal do formulário de inscrição
 ├── login.html           # Página de login
@@ -44,7 +44,7 @@ Armazenamento Local (localStorage)
 │   └── styles-login.css # Estilo da tela de login
 ├── img/
 │   └── ...              # Ícones e ilustrações
-
+```
 📌 Como testar localmente
 
     Clone o repositório:
