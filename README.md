@@ -45,9 +45,13 @@ Abra o arquivo login.html ou index.html com seu navegador.
 🌟 Diferenciais implementados
 
 ✅ Modo escuro
+
 ✅ Validações avançadas
+
 ✅ LocalStorage com recuperação de estado
+
 ✅ Separação de arquivos HTML, CSS e JS
+
 ✅ Design responsivo
 
 🎯 Melhorias futuras
