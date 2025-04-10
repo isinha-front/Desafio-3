@@ -35,32 +35,23 @@ Armazenamento Local (localStorage)
 📂 Estrutura do Projeto
 
 📁 Desafio-3-main/
-
 ├── index.html           # Página principal do formulário de inscrição
-
 ├── login.html           # Página de login
-
 ├── js/
-
 │   └── script.js        # Lógica de validações e interações
-
 ├── css/
-
 │   ├── style.css        # Estilo do formulário
-
 │   └── styles-login.css # Estilo da tela de login
-
 ├── img/
-
 │   └── ...              # Ícones e ilustrações
 
 📌 Como testar localmente
 
     Clone o repositório:
 
-    ```bash 
+    bash 
     git clone https://github.com/isinha-front/Desafio-3.git
-    ```
+    
 Abra o arquivo login.html ou index.html com seu navegador.
 
 🔒 Certifique-se de permitir o uso de localStorage no navegador.
